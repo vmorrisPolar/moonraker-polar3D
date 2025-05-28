@@ -23,6 +23,7 @@ from inotify_simple import flags as iFlags
 from ...utils import source_info
 from ...utils import json_wrapper as jsonw
 from ...common import RequestType, TransportType
+from ...utils import ServerError
 
 # Annotation imports
 from typing import (

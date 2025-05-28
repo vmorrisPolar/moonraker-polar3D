@@ -1,0 +1,412 @@
+-------------------- Log Start | Wed May 28 14:06:04 2025 --------------------
+platform: macOS-15.5
+data_path: /Users/vanmorris/printer_data
+is_default_data_path: True
+config_file: moonraker.conf
+backup_config: None
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: True
+instance_uuid: 40a7e0b81e9b4506b651fd5c3f129b34
+unix_socket_path: /Users/vanmorris/printer_data/comms/moonraker.sock
+structured_logging: False
+software_version: v0.9.3-75-g0310d0b-dirty
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: ['pyproject.toml']
+unofficial_components: []
+log_file: debug
+python_version: 3.12.1 (v3.12.1:2305ca5144, Dec  7 2023, 17:23:38) [Clang 13.0.0 (clang-1300.0.29.30)]
+launch_args: /Users/vanmorris/moonraker/.venv/bin/python /Users/vanmorris/moonraker/moonraker/__main__.py -c moonraker.conf -l debug
+msgspec_enabled: False
+uvloop_enabled: False
+2025-05-28 10:06:04,147 [confighelper.py:read_file()] - Configuration File '/Users/vanmorris/moonraker/moonraker.conf' parsed, total size: 539 B
+2025-05-28 10:06:04,147 [server.py:add_log_rollover_item()] - 
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+enable_debug_logging = True
+klippy_uds_address = /tmp/klippy_uds
+
+[authorization]
+trusted_clients = 
+	127.0.0.0/8
+	::1/128
+	192.168.0.0/16
+	FE80::/10
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[file_manager]
+enable_object_processing = True
+
+[data_store]
+temperature_store_size = 600
+gcode_store_size = 1000
+
+[polar_cloud]
+enable_debug = True
+camera_url = http://localhost:8080/webcam/?action=stream
+printer_type = cartesian
+
+#################################################################
+All Configuration Files:
+/Users/vanmorris/moonraker/moonraker.conf
+#################################################################
+2025-05-28 10:06:04,147 [server.py:add_warning()] - [server]: Option 'enable_debug_logging' is deprecated, see the configuration documention at https://moonraker.readthedocs.io/en/latest/configuration/
+2025-05-28 10:06:04,375 [server.py:load_component()] - Component (secrets) loaded
+2025-05-28 10:06:04,380 [server.py:load_component()] - Component (template) loaded
+2025-05-28 10:06:04,381 [server.py:load_component()] - Component (klippy_connection) loaded
+2025-05-28 10:06:05,330 [server.py:load_component()] - Component (application) loaded
+2025-05-28 10:06:05,351 [server.py:load_component()] - Component (websockets) loaded
+2025-05-28 10:06:05,414 [server.py:add_log_rollover_item()] - Loading Sqlite database provider. Sqlite Version: 3.43.1
+2025-05-28 10:06:05,416 [server.py:add_log_rollover_item()] - Created default SQL table namespace_store
+2025-05-28 10:06:05,418 [server.py:add_log_rollover_item()] - Unsafe Shutdown Count: 0
+2025-05-28 10:06:05,419 [server.py:load_component()] - Component (database) loaded
+2025-05-28 10:06:06,617 [server.py:load_component()] - Component (dbus_manager) loaded
+2025-05-28 10:06:06,674 [file_manager.py:__init__()] - Using File System Observer: inotify
+2025-05-28 10:06:06,675 [server.py:load_component()] - Unable to load component: (file_manager)
+Traceback (most recent call last):
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 314, in load_component
+    component = load_func(config)
+                ^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/__init__.py", line 15, in load_component
+    return fm.load_component(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 2649, in load_component
+    return FileManager(config)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 101, in __init__
+    self.fs_observer = obs_class(
+                       ^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 1820, in __init__
+    self.inotify = INotify(nonblocking=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/.venv/lib/python3.12/site-packages/inotify_simple.py", line 91, in __init__
+    FileIO.__init__(self, _libc_call(_libc.inotify_init1, flags), mode='rb')
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 392, in __getattr__
+    func = self.__getitem__(name)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 397, in __getitem__
+    func = self._FuncPtr((name_or_ordinal, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: dlsym(0x330fc6728, inotify_init1): symbol not found
+2025-05-28 10:06:06,675 [server.py:launch_server()] - Moonraker Error
+Traceback (most recent call last):
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 563, in launch_server
+    server.load_components()
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 278, in load_components
+    self.load_component(config, component)
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 314, in load_component
+    component = load_func(config)
+                ^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/__init__.py", line 15, in load_component
+    return fm.load_component(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 2649, in load_component
+    return FileManager(config)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 101, in __init__
+    self.fs_observer = obs_class(
+                       ^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 1820, in __init__
+    self.inotify = INotify(nonblocking=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/.venv/lib/python3.12/site-packages/inotify_simple.py", line 91, in __init__
+    FileIO.__init__(self, _libc_call(_libc.inotify_init1, flags), mode='rb')
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 392, in __getattr__
+    func = self.__getitem__(name)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 397, in __getitem__
+    func = self._FuncPtr((name_or_ordinal, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: dlsym(0x330fc6728, inotify_init1): symbol not found
+2025-05-28 10:06:06,675 [server.py:main()] - Server Shutdown
+-------------------- Log Start | Wed May 28 14:06:24 2025 --------------------
+platform: macOS-15.5
+data_path: /Users/vanmorris/printer_data
+is_default_data_path: True
+config_file: moonraker.conf
+backup_config: None
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: True
+instance_uuid: 40a7e0b81e9b4506b651fd5c3f129b34
+unix_socket_path: /Users/vanmorris/printer_data/comms/moonraker.sock
+structured_logging: False
+software_version: v0.9.3-75-g0310d0b-dirty
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: ['pyproject.toml']
+unofficial_components: []
+log_file: debug
+python_version: 3.12.1 (v3.12.1:2305ca5144, Dec  7 2023, 17:23:38) [Clang 13.0.0 (clang-1300.0.29.30)]
+launch_args: /Users/vanmorris/moonraker/.venv/bin/python /Users/vanmorris/moonraker/moonraker/__main__.py -c moonraker.conf -l debug
+msgspec_enabled: False
+uvloop_enabled: False
+2025-05-28 10:06:24,928 [confighelper.py:read_file()] - Configuration File '/Users/vanmorris/moonraker/moonraker.conf' parsed, total size: 562 B
+2025-05-28 10:06:24,928 [server.py:add_log_rollover_item()] - 
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+enable_debug_logging = True
+klippy_uds_address = /tmp/klippy_uds
+
+[authorization]
+trusted_clients = 
+	127.0.0.0/8
+	::1/128
+	192.168.0.0/16
+	FE80::/10
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[file_manager]
+enable_object_processing = False
+enable_inotify = False
+
+[data_store]
+temperature_store_size = 600
+gcode_store_size = 1000
+
+[polar_cloud]
+enable_debug = True
+camera_url = http://localhost:8080/webcam/?action=stream
+printer_type = cartesian
+
+#################################################################
+All Configuration Files:
+/Users/vanmorris/moonraker/moonraker.conf
+#################################################################
+2025-05-28 10:06:24,928 [server.py:add_warning()] - [server]: Option 'enable_debug_logging' is deprecated, see the configuration documention at https://moonraker.readthedocs.io/en/latest/configuration/
+2025-05-28 10:06:24,951 [server.py:load_component()] - Component (secrets) loaded
+2025-05-28 10:06:24,952 [server.py:load_component()] - Component (template) loaded
+2025-05-28 10:06:24,953 [server.py:load_component()] - Component (klippy_connection) loaded
+2025-05-28 10:06:25,080 [server.py:load_component()] - Component (application) loaded
+2025-05-28 10:06:25,084 [server.py:load_component()] - Component (websockets) loaded
+2025-05-28 10:06:25,090 [server.py:add_log_rollover_item()] - Loading Sqlite database provider. Sqlite Version: 3.43.1
+2025-05-28 10:06:25,091 [server.py:add_log_rollover_item()] - Unsafe Shutdown Count: 0
+2025-05-28 10:06:25,091 [server.py:load_component()] - Component (database) loaded
+2025-05-28 10:06:25,120 [server.py:load_component()] - Component (dbus_manager) loaded
+2025-05-28 10:06:25,129 [file_manager.py:__init__()] - Using File System Observer: inotify
+2025-05-28 10:06:25,129 [server.py:load_component()] - Unable to load component: (file_manager)
+Traceback (most recent call last):
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 314, in load_component
+    component = load_func(config)
+                ^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/__init__.py", line 15, in load_component
+    return fm.load_component(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 2649, in load_component
+    return FileManager(config)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 101, in __init__
+    self.fs_observer = obs_class(
+                       ^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 1820, in __init__
+    self.inotify = INotify(nonblocking=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/.venv/lib/python3.12/site-packages/inotify_simple.py", line 91, in __init__
+    FileIO.__init__(self, _libc_call(_libc.inotify_init1, flags), mode='rb')
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 392, in __getattr__
+    func = self.__getitem__(name)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 397, in __getitem__
+    func = self._FuncPtr((name_or_ordinal, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: dlsym(0x330fc6728, inotify_init1): symbol not found
+2025-05-28 10:06:25,129 [server.py:launch_server()] - Moonraker Error
+Traceback (most recent call last):
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 563, in launch_server
+    server.load_components()
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 278, in load_components
+    self.load_component(config, component)
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 314, in load_component
+    component = load_func(config)
+                ^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/__init__.py", line 15, in load_component
+    return fm.load_component(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 2649, in load_component
+    return FileManager(config)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 101, in __init__
+    self.fs_observer = obs_class(
+                       ^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 1820, in __init__
+    self.inotify = INotify(nonblocking=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/.venv/lib/python3.12/site-packages/inotify_simple.py", line 91, in __init__
+    FileIO.__init__(self, _libc_call(_libc.inotify_init1, flags), mode='rb')
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 392, in __getattr__
+    func = self.__getitem__(name)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 397, in __getitem__
+    func = self._FuncPtr((name_or_ordinal, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: dlsym(0x330fc6728, inotify_init1): symbol not found
+2025-05-28 10:06:25,130 [server.py:main()] - Server Shutdown
+-------------------- Log Start | Wed May 28 14:06:58 2025 --------------------
+platform: macOS-15.5
+data_path: /private/tmp/moonraker_dev
+is_default_data_path: False
+config_file: moonraker.conf
+backup_config: None
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: True
+instance_uuid: 6653681da0a9469da4862e8b980d29e4
+unix_socket_path: /private/tmp/moonraker_dev/comms/moonraker.sock
+structured_logging: False
+software_version: v0.9.3-75-g0310d0b-dirty
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: ['moonraker/components/file_manager/file_manager.py', 'pyproject.toml']
+unofficial_components: []
+log_file: debug
+python_version: 3.12.1 (v3.12.1:2305ca5144, Dec  7 2023, 17:23:38) [Clang 13.0.0 (clang-1300.0.29.30)]
+launch_args: /Users/vanmorris/moonraker/.venv/bin/python /Users/vanmorris/moonraker/moonraker/__main__.py -c moonraker.conf -l debug
+msgspec_enabled: False
+uvloop_enabled: False
+2025-05-28 10:06:58,492 [confighelper.py:read_file()] - Configuration File '/Users/vanmorris/moonraker/moonraker.conf' parsed, total size: 562 B
+2025-05-28 10:06:58,492 [server.py:add_log_rollover_item()] - 
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+enable_debug_logging = True
+klippy_uds_address = /tmp/klippy_uds
+
+[authorization]
+trusted_clients = 
+	127.0.0.0/8
+	::1/128
+	192.168.0.0/16
+	FE80::/10
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[file_manager]
+enable_object_processing = False
+enable_inotify = False
+
+[data_store]
+temperature_store_size = 600
+gcode_store_size = 1000
+
+[polar_cloud]
+enable_debug = True
+camera_url = http://localhost:8080/webcam/?action=stream
+printer_type = cartesian
+
+#################################################################
+All Configuration Files:
+/Users/vanmorris/moonraker/moonraker.conf
+#################################################################
+2025-05-28 10:06:58,492 [server.py:add_warning()] - [server]: Option 'enable_debug_logging' is deprecated, see the configuration documention at https://moonraker.readthedocs.io/en/latest/configuration/
+2025-05-28 10:06:58,514 [server.py:load_component()] - Component (secrets) loaded
+2025-05-28 10:06:58,516 [server.py:load_component()] - Component (template) loaded
+2025-05-28 10:06:58,517 [server.py:load_component()] - Component (klippy_connection) loaded
+2025-05-28 10:06:58,646 [server.py:load_component()] - Component (application) loaded
+2025-05-28 10:06:58,651 [server.py:load_component()] - Component (websockets) loaded
+2025-05-28 10:06:58,657 [server.py:add_log_rollover_item()] - Loading Sqlite database provider. Sqlite Version: 3.43.1
+2025-05-28 10:06:58,661 [server.py:add_log_rollover_item()] - Created default SQL table namespace_store
+2025-05-28 10:06:58,662 [server.py:add_log_rollover_item()] - Unsafe Shutdown Count: 0
+2025-05-28 10:06:58,663 [server.py:load_component()] - Component (database) loaded
+2025-05-28 10:06:58,692 [server.py:load_component()] - Component (dbus_manager) loaded
+2025-05-28 10:06:58,717 [file_manager.py:__init__()] - Using File System Observer: inotify
+2025-05-28 10:06:58,717 [server.py:load_component()] - Unable to load component: (file_manager)
+Traceback (most recent call last):
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 314, in load_component
+    component = load_func(config)
+                ^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/__init__.py", line 15, in load_component
+    return fm.load_component(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 2650, in load_component
+    return FileManager(config)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 102, in __init__
+    self.fs_observer = obs_class(
+                       ^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 1821, in __init__
+    self.inotify = INotify(nonblocking=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/.venv/lib/python3.12/site-packages/inotify_simple.py", line 91, in __init__
+    FileIO.__init__(self, _libc_call(_libc.inotify_init1, flags), mode='rb')
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 392, in __getattr__
+    func = self.__getitem__(name)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 397, in __getitem__
+    func = self._FuncPtr((name_or_ordinal, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: dlsym(0x330fc6728, inotify_init1): symbol not found
+2025-05-28 10:06:58,717 [server.py:launch_server()] - Moonraker Error
+Traceback (most recent call last):
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 563, in launch_server
+    server.load_components()
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 278, in load_components
+    self.load_component(config, component)
+  File "/Users/vanmorris/moonraker/moonraker/server.py", line 314, in load_component
+    component = load_func(config)
+                ^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/__init__.py", line 15, in load_component
+    return fm.load_component(config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 2650, in load_component
+    return FileManager(config)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 102, in __init__
+    self.fs_observer = obs_class(
+                       ^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/moonraker/components/file_manager/file_manager.py", line 1821, in __init__
+    self.inotify = INotify(nonblocking=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vanmorris/moonraker/.venv/lib/python3.12/site-packages/inotify_simple.py", line 91, in __init__
+    FileIO.__init__(self, _libc_call(_libc.inotify_init1, flags), mode='rb')
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 392, in __getattr__
+    func = self.__getitem__(name)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 397, in __getitem__
+    func = self._FuncPtr((name_or_ordinal, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: dlsym(0x330fc6728, inotify_init1): symbol not found
+2025-05-28 10:06:58,718 [server.py:main()] - Server Shutdown
